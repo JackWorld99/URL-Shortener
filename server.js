@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const ShortUrl = require("./models/shortUrl");
+const urlRoute = require("./routes/url");
 const app = express();
 
 mongoose
@@ -8,26 +8,17 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then((client) => {
-    console.log("Connected to Mongodb!");
+  .then(() => {
+    console.log("Databse Connected Successfully!");
   })
-  .catch(console.error());
+  .catch((error) => {
+    console.log("Could not connect to database", error);
+    process.exit();
+  });
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-
 app.use(express.static(__dirname + "/public"));
-
-app.get("/", async (req, res) => {
-  const shortUrls = await ShortUrl.find();
-  res.render("index", {
-    shortUrls: shortUrls,
-  });
-});
-
-app.post("/shortUrls", async (req, res) => {
-  await ShortUrl.create({ full: req.body.fullUrl });
-  res.redirect("/");
-});
+app.use("/", urlRoute);
 
 app.listen(process.env.PORT || 5000);
