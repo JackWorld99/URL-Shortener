@@ -37,3 +37,8 @@ exports.deleteOne = async (req, res) => {
   await ShortUrl.findByIdAndRemove(req.params.id);
   res.redirect("/");
 };
+
+exports.clearAll = async (req, res) => {
+  await ShortUrl.deleteMany();
+  res.redirect("/");
+};
