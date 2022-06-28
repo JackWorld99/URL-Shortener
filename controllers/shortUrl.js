@@ -32,3 +32,8 @@ exports.updateClick = async (req, res) => {
   shortUrl.save();
   res.redirect(shortUrl.full);
 };
+
+exports.deleteOne = async (req, res) => {
+  await ShortUrl.findByIdAndRemove(req.params.id);
+  res.redirect("/");
+};
