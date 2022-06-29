@@ -29,21 +29,21 @@
         </div>
         <div class="urls-area">
             <div class="title">
-                <li>Shorten URL</li>
-                <li>Original URL</li>
+                <li>Short URL</li>
+                <li>Full URL</li>
                 <li>Clicks</li>
                 <li>Action</li>
             </div>
             <% shortUrls.forEach(shortUrl=> { %>
                 <div class="data">
                     <li>
-                        <a href="<%= shortUrl.full %>">
-                            <%= shortUrl.full %>
+                        <a href="<%= shortUrl.short %>">
+                            <%= shortUrl.short %>
                         </a>
                     </li>
                     <li>
-                        <a href="directTo/<%= shortUrl.short %>">
-                            <%= shortUrl.short %>
+                        <a href="directTo/<%= shortUrl.full %>">
+                            <%= shortUrl.full %>
                         </a>
                     </li>
                     <li>
