@@ -19,8 +19,13 @@
             <button type="submit">Shorten</button>
         </form>
         <div class="statistics">
-            <span>Total Links: <span></span> & Total Clicks: <span></span></span>
-            <a href="php/delete.php?delete=all">Clear All</a>
+            <span>Total Links: <span>
+                    <%= TotalLinks %>
+                </span> & Total Clicks: <span>
+                    <%= TotalClicks %>
+                </span>
+            </span>
+            <a href="clearAll">Clear All</a>
         </div>
         <div class="urls-area">
             <div class="title">
@@ -29,24 +34,26 @@
                 <li>Clicks</li>
                 <li>Action</li>
             </div>
-            <div class="data">
-                <% shortUrls.forEach(shortUrl=> { %>
+            <% shortUrls.forEach(shortUrl=> { %>
+                <div class="data">
                     <li>
                         <a href="<%= shortUrl.full %>">
                             <%= shortUrl.full %>
                         </a>
                     </li>
                     <li>
-                        <a href="<%= shortUrl.short %>">
+                        <a href="directTo/<%= shortUrl.short %>">
                             <%= shortUrl.short %>
                         </a>
                     </li>
                     <li>
-                        <% shortUrl.clicks %>
+                        <%= shortUrl.clicks %>
                     </li>
-                    <li><a href="">Delete</a></li>
-                    <% }); %>
-            </div>
+                    <li>
+                        <a href="delete/<%= shortUrl.id %>"><i class="uil uil-trash-alt"></i></a>
+                    </li>
+                </div>
+                <% }); %>
         </div>
     </div>
 </body>
