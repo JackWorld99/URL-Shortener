@@ -40,5 +40,4 @@ exports.deleteOne = async (req, res) => {
 
 exports.clearAll = async (req, res) => {
   await ShortUrl.deleteMany();
-  res.redirect("/");
 };
